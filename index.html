@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lifedots - Your weeks of life as dots</title>
+    <meta name="description" content="This free app can completely change your life. Based on your estimated lifetime, it converts the WEEKS you have left into dots.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Mikołaj Kosmalski">
+    <meta name="keywords" content="weeks of life, life dots, life weeks, lifespan, lifetime, happiness, psychology, philosophy">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+</head>
+
+<body>
+    <div id="main-container" class="flex-center margin-top">
+        <div id="sub-container" class="flex-center">
+            <div id="logo-container">
+                <img src="lifedots.svg" id="logo">
+            </div>
+            <div id="question">
+                <div id="question-txt">
+                    How many more years do you think you will live?
+                </div>
+                <!-- https://codepen.io/reti/pen/KKgOaGp -->
+            </div>
+            <div id="number-input" class="margin-top">
+                <button id="btn-sub" class="myButton">-</button>
+                <input type="number" id="years-to-die" oninput="generateDots()" min="0">
+                <button id="btn-add" class="myButton">+</button>
+            </div>
+            <div id="message" class="margin-top"></div>
+            <div id="dots" class="margin-top"></div>
+            <div id="second-message" class="margin-top"></div>
+        </div>
+    </div>
+    <script src="colordots.js"></script>
+    <script src="inputNumber.js"></script>
+    <script>
+        function generateDots() {
+            if (parseInt(yearsToDie.value) > 0) {
+                var weeksToDie = yearsToDie.value * 52;
+                var text = ". ".repeat(weeksToDie);
+                document.getElementById("message").innerHTML = `If you lived ${yearsToDie.value} years, you would then have <span id="weeks-to-die">${weeksToDie}</span> weeks left. Let's represent each week with a dot:`
+                document.getElementById("dots").innerHTML = text;
+                colordots()
+                document.getElementById("second-message").innerHTML = "Here are your life dots. Surprised to see so few? Then make good use of them!"
+            } else {
+                document.getElementById("message").innerHTML = ''
+                document.getElementById("dots").innerHTML = ''
+                document.getElementById("second-message").innerHTML = ''
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', generateDots)
+    </script>
+</body>
+
+</html>
